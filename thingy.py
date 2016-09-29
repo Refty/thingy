@@ -68,7 +68,8 @@ class Thingy(object):
         except AttributeError:
             if attr.startswith(self._view_prefix):
                 view = self._views.get(attr[len(self._view_prefix):])
-                return self._proxify_view(view)
+                if view:
+                    return self._proxify_view(view)
             if self._silent:
                 return None
             raise
