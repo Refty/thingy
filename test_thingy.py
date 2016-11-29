@@ -71,9 +71,15 @@ def test_update_with_args():
     assert thingy.baz == "QUX"
 
 
-def test_default_dict_view():
+def test_default_view():
     thingy = Thingy(foo="bar", baz="qux")
-    assert thingy.view_dict() == {"foo": "bar", "baz": "qux"}
+    assert thingy.view() == {"foo": "bar", "baz": "qux"}
+
+
+def test_missing_view():
+    thingy = Thingy()
+    with raises(KeyError):
+        thingy.view("nop")
 
 
 def test_silence():
@@ -91,50 +97,50 @@ def test_silence():
 def test_define_view(TestThingy):
     TestThingy.define_view("test")
     thingy = TestThingy(foo="bar", baz="qux")
-    assert thingy.view_dict() == {"foo": "bar", "baz": "qux"}
-    assert thingy.view_test() == {}
+    assert thingy.view() == {"foo": "bar", "baz": "qux"}
+    assert thingy.view("test") == {}
 
 
 def test_define_view_override(TestThingy):
-    TestThingy.define_view("dict")
+    TestThingy.define_view("defaults", defaults=False)
     thingy = TestThingy(foo="bar", baz="qux")
-    assert not thingy.view_dict()
+    assert not thingy.view()
 
 
 def test_define_view_defaults(TestThingy):
     TestThingy.define_view("test", defaults=True)
     thingy = TestThingy(foo="bar", baz="qux")
-    assert thingy.view_test() == {"foo": "bar", "baz": "qux"}
+    assert thingy.view("test") == {"foo": "bar", "baz": "qux"}
 
 
 def test_define_view_include(TestThingy):
     TestThingy.define_view("test", include="foo")
     thingy = TestThingy(foo="bar", baz="qux")
-    assert thingy.view_test() == {"foo": "bar"}
+    assert thingy.view("test") == {"foo": "bar"}
 
 
 def test_define_view_include_list(TestThingy):
     TestThingy.define_view("test", include=["foo", "baz"])
     thingy = TestThingy(foo="bar", baz="qux")
-    assert thingy.view_test() == {"foo": "bar", "baz": "qux"}
+    assert thingy.view("test") == {"foo": "bar", "baz": "qux"}
 
 
 def test_define_view_exclude(TestThingy):
     TestThingy.define_view("test", defaults=True, exclude="foo")
     thingy = TestThingy(foo="bar", baz="qux")
-    assert thingy.view_test() == {"baz": "qux"}
+    assert thingy.view("test") == {"baz": "qux"}
 
 
 def test_define_view_exclude_list(TestThingy):
     TestThingy.define_view("test", defaults=True, exclude=["foo", "baz"])
     thingy = TestThingy(foo="bar", baz="qux")
-    assert thingy.view_test() == {}
+    assert thingy.view("test") == {}
 
 
 def test_tuple_aliases(TestThingy):
     TestThingy.define_view("test", include=[("foo", "FOO")])
     thingy = TestThingy(foo="bar", baz="qux")
-    assert thingy.view_test() == {"FOO": "bar"}
+    assert thingy.view("test") == {"FOO": "bar"}
 
 
 def test_database_names():

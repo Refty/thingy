@@ -48,15 +48,14 @@ class ThingyMetaClass(type):
     def __new__(cls, name, bases, attrs):
         attrs.setdefault("_views", {})
         klass = type.__new__(cls, name, bases, attrs)
-        if not attrs["_views"]:
-            klass.define_view("dict", defaults=True)
+        if "defaults" not in klass._views:
+            klass.define_view("defaults", defaults=True)
         return klass
 
 
 @six.add_metaclass(ThingyMetaClass)
 class Thingy(object):
     _view_cls = View
-    _view_prefix = "view_"
     _silent = True
 
     def __init__(self, *args, **kwargs):
@@ -66,18 +65,9 @@ class Thingy(object):
         try:
             return object.__getattribute__(self, attr)
         except AttributeError:
-            if attr.startswith(self._view_prefix):
-                view = self._views.get(attr[len(self._view_prefix):])
-                if view:
-                    return self._proxify_view(view)
             if self._silent:
                 return None
             raise
-
-    def _proxify_view(self, view):
-        def __inner(*args, **kwargs):
-            return view(self, *args, **kwargs)
-        return __inner
 
     @classmethod
     def define_view(cls, name, *args, **kwargs):
@@ -91,6 +81,9 @@ class Thingy(object):
 
     def update(self, *args, **kwargs):
         self._update(*args, **kwargs)
+
+    def view(self, name="defaults", *args, **kwargs):
+        return self._views[name](self, *args, **kwargs)
 
 
 class DatabaseThingy(Thingy):

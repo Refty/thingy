@@ -2,7 +2,7 @@
 Thingy
 ======
 
-Dictionary as an object, that can have different views
+Dictionary as an object, that can have different dictionary views
 
 
 Install
@@ -33,7 +33,7 @@ Dictionary as an object...
    "barqux"
 
    >>> thingy.foo = "BARRRR"
-   >>> thingy.view_dict()
+   >>> thingy.view()
    {"foo": "BARRRR", "baz": "qux"}
 
 
@@ -46,7 +46,7 @@ Dictionary as an object...
    >>> MyThingy.define_view(name="no_foo", defaults=True, exclude="foo")
 
    >>> thingy = MyThingy({"foo": "bar", "baz": "qux"})
-   >>> thingy.view_fooz()
+   >>> thingy.view("fooz")
    {"foo": "bar", "foobaz": "barqux"}
-   >>> thingy.view_no_foo()
+   >>> thingy.view("no_foo")
    {"baz": "qux"}
