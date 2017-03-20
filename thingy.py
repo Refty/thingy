@@ -144,11 +144,9 @@ class DatabaseThingy(Thingy):
         if cls._database:
             return cls._get_database_name(cls._database)
         try:
-            name = cls.names[-2].lower()
+            return cls.names[-2].lower()
         except IndexError:
             raise AttributeError("Undefined database.")
-        else:
-            return name
 
     @classproperty
     def table_name(cls):
