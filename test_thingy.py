@@ -6,11 +6,19 @@ from thingy import DatabaseThingy, Thingy, View, classproperty
 
 def test_classproperty():
     class Test:
+        _foo = "bar"
+
         @classproperty
         def foo(cls):
-            return "bar"
+            return cls._foo
+
+        @foo.setter
+        def set_foo(cls, value):
+            cls._foo = value
 
     assert Test.foo == "bar"
+    Test.foo = "baz"
+    assert Test.foo == "baz"
 
 
 def test_view_return_type():
