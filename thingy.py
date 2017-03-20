@@ -86,6 +86,9 @@ class Thingy(object):
         return self._views[name](self, *args, **kwargs)
 
 
+names_regex = re.compile("([A-Z][a-z]+)")
+
+
 class DatabaseThingy(Thingy):
     _database = None
     _table = None
@@ -134,7 +137,7 @@ class DatabaseThingy(Thingy):
 
     @classproperty
     def names(cls):
-        return re.findall("([A-Z][a-z]+)", cls.__name__)
+        return names_regex.findall(cls.__name__)
 
     @classproperty
     def database_name(cls):
