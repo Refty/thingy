@@ -215,9 +215,17 @@ def test_undefined_database():
 
 def test_table():
     class DatabaseTable(DatabaseThingy):
+        _database = True
+
+    with raises(AttributeError):
+        DatabaseTable.table
+
+    class DatabaseTable(DatabaseThingy):
+        _database = True
+
         @classmethod
         def _get_table(cls, database, name):
-            return True
+            return database
 
     assert DatabaseTable.table is True
 
