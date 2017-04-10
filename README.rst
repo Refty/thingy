@@ -2,7 +2,7 @@
 Thingy
 ======
 
-Dictionary as an object, that can have different dictionary views
+Dictionaries as objects, that can have different dictionary views!
 
 
 Install
@@ -16,7 +16,7 @@ Install
 Examples
 ========
 
-Dictionary as an object...
+Dictionaries as objects...
 --------------------------
 
 .. code-block:: python
@@ -37,8 +37,8 @@ Dictionary as an object...
    {"foo": "BARRRR", "baz": "qux"}
 
 
-...that can have different views!
----------------------------------
+...that can have different dictionary views!
+--------------------------------------------
 
 .. code-block:: python
 
