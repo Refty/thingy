@@ -224,10 +224,10 @@ def test_undefined_database():
         DatabaseTable.database
 
 
-def test_table_from_name():
+def test_table():
     class DatabaseTable(DatabaseThingy):
         @classmethod
-        def _get_table_from_name(cls, name):
+        def _get_table(cls, database, name):
             return True
 
     assert DatabaseTable.table is True
