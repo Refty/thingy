@@ -50,3 +50,9 @@ Dictionary as an object...
    {"foo": "bar", "foobaz": "barqux"}
    >>> thingy.view("no_foo")
    {"baz": "qux"}
+
+
+License
+=======
+
+MIT
