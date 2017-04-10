@@ -188,20 +188,6 @@ def test_database_from_name():
     assert DatabaseTable.database
 
 
-def test_undefined_table():
-    class DatabaseTable(DatabaseThingy):
-        pass
-
-    with raises(AttributeError):
-        DatabaseTable.table
-
-    class Table(DatabaseThingy):
-        _database = True
-
-    with raises(AttributeError):
-        Table.table
-
-
 def test_undefined_database():
     class Table(DatabaseThingy):
         pass
@@ -222,6 +208,9 @@ def test_undefined_database():
 
     with raises(AttributeError):
         DatabaseTable.database
+
+    with raises(AttributeError):
+        DatabaseTable.table
 
 
 def test_table():
