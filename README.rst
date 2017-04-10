@@ -52,6 +52,19 @@ Dictionaries as objects...
    {"baz": "qux"}
 
 
+Why Thingy?
+===========
+
+Because it's much more enjoyable to write ``foo.bar`` than ``foo["bar"]``.
+
+Thingy is mainly meant to be used inside other libraries to provide abstractions
+over dictionaries, which can be useful for writing ORMs or similar utilities.
+
+Thingy's views system is also particularly useful as-is when you intensively
+manipulate dictionaries and often restrict those dictionaries to a few redundant
+items.
+
+
 License
 =======
 
