@@ -179,21 +179,12 @@ def test_table_names():
     assert Table.table_name is None
 
 
-def test_database_from_name():
-    class DatabaseTable(DatabaseThingy):
-        @classmethod
-        def _get_database_from_name(cls, name):
-            return True
-
-    assert DatabaseTable.database
-
-
 def test_undefined_database():
     class Table(DatabaseThingy):
         pass
 
-    with raises(AttributeError):
-        Table.database_name
+    assert Table.database_name is None
+
     with raises(AttributeError):
         Table.database
 
@@ -209,17 +200,22 @@ def test_undefined_database():
     with raises(AttributeError):
         DatabaseTable.database
 
+
+def test_undefined_table():
+    class Table(DatabaseThingy):
+        pass
+
     with raises(AttributeError):
-        DatabaseTable.table
+        Table.table
 
-
-def test_table():
-    class DatabaseTable(DatabaseThingy):
+    class Table(DatabaseThingy):
         _database = True
 
     with raises(AttributeError):
-        DatabaseTable.table
+        Table.table
 
+
+def test_table():
     class DatabaseTable(DatabaseThingy):
         _database = True
 
@@ -228,14 +224,3 @@ def test_table():
             return database
 
     assert DatabaseTable.table is True
-
-
-def test_database_from_table():
-    class Table(DatabaseThingy):
-        _table = True
-
-        @classmethod
-        def _get_database_from_table(cls, name):
-            return True
-
-    assert Table.database is True

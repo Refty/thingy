@@ -94,15 +94,11 @@ class DatabaseThingy(Thingy):
     _table = None
 
     @classmethod
-    def _get_database_from_table(cls, table):
+    def _get_database(cls, table, name):
         raise AttributeError("Undefined database.")
 
     @classmethod
-    def _get_database_from_name(cls, name):
-        raise AttributeError("Undefined database.")
-
-    @classmethod
-    def _get_table(cls, database, table_name):
+    def _get_table(cls, database, name):
         raise AttributeError("Undefined table.")
 
     @classmethod
@@ -116,10 +112,7 @@ class DatabaseThingy(Thingy):
     @classproperty
     def database(cls):
         if not cls._database:
-            if cls._table:
-                cls._database = cls._get_database_from_table(cls._table)
-            elif cls.database_name:
-                cls._database = cls._get_database_from_name(cls.database_name)
+            cls._database = cls._get_database(cls._table, cls.database_name)
         return cls._database
 
     @classproperty
@@ -139,7 +132,7 @@ class DatabaseThingy(Thingy):
         try:
             return cls.names[-2].lower()
         except IndexError:
-            raise AttributeError("Undefined database.")
+            pass
 
     @classproperty
     def table_name(cls):
