@@ -42,8 +42,8 @@ Dictionaries as objects...
 
 .. code-block:: python
 
-   >>> MyThingy.define_view(name="fooz", include=["foo", "foobaz"])
-   >>> MyThingy.define_view(name="no_foo", defaults=True, exclude="foo")
+   >>> MyThingy.add_view(name="fooz", include=["foo", "foobaz"])
+   >>> MyThingy.add_view(name="no_foo", defaults=True, exclude="foo")
 
    >>> thingy = MyThingy({"foo": "bar", "baz": "qux"})
    >>> thingy.view("fooz")

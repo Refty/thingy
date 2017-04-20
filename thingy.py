@@ -49,7 +49,7 @@ class ThingyMetaClass(type):
         attrs.setdefault("_views", {})
         klass = type.__new__(cls, name, bases, attrs)
         if "defaults" not in klass._views:
-            klass.define_view("defaults", defaults=True)
+            klass.add_view("defaults", defaults=True)
         return klass
 
 
@@ -70,7 +70,7 @@ class Thingy(object):
             raise
 
     @classmethod
-    def define_view(cls, name, *args, **kwargs):
+    def add_view(cls, name, *args, **kwargs):
         cls._views.update({name: cls._view_cls(*args, **kwargs)})
 
     def _update(self, *args, **kwargs):
