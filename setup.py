@@ -8,7 +8,7 @@ def get_description():
 
 setup(
     name="Thingy",
-    version="0.3.0",
+    version="0.4.0",
     url="https://github.com/numberly/thingy",
     license="MIT",
     author="Guillaume Gelin",
