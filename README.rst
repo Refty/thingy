@@ -65,6 +65,15 @@ manipulate dictionaries and often restrict those dictionaries to a few redundant
 items.
 
 
+Tests
+=====
+
+To run Thingy tests:
+
+* install developers requirements with ``pip install -r requirements.txt``;
+* run ``pytest``.
+
+
 License
 =======
 
