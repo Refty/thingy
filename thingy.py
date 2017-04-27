@@ -73,6 +73,9 @@ class Thingy(object):
                 return None
             raise
 
+    def __repr__(self):
+        return "{}({})".format(self.__class__.__name__, self.__dict__)
+
     @classmethod
     def add_view(cls, name, *args, **kwargs):
         cls._views.update({name: cls._view_cls(*args, **kwargs)})

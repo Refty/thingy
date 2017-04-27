@@ -65,6 +65,12 @@ def test_init_mixed():
     assert thingy.baz == "qux"
 
 
+def test_repr():
+    thingy = eval(repr(Thingy(bar="baz")))
+    assert isinstance(thingy, Thingy)
+    assert thingy.bar == "baz"
+
+
 def test_update_with_dict():
     thingy = Thingy(foo="bar", baz="qux")
     thingy.update({"foo": "BAR"})
