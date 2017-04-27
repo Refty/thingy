@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from pytest import fixture, raises
-from thingy import DatabaseThingy, Thingy, View, classproperty
+from thingy import DatabaseThingy, Thingy, View, classproperty, registry
 
 
 def test_classproperty():
@@ -224,3 +224,17 @@ def test_table():
             return database
 
     assert DatabaseTable.table is True
+
+
+def test_registry():
+    del registry[:]
+
+    class Foo(Thingy):
+        pass
+
+    assert registry == [Foo]
+
+    class Bar(Thingy):
+        pass
+
+    assert registry == [Foo, Bar]

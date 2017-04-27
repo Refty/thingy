@@ -43,6 +43,9 @@ class View(object):
         return d
 
 
+registry = []
+
+
 class ThingyMetaClass(type):
 
     def __new__(cls, name, bases, attrs):
@@ -50,6 +53,7 @@ class ThingyMetaClass(type):
         klass = type.__new__(cls, name, bases, attrs)
         if "defaults" not in klass._views:
             klass.add_view("defaults", defaults=True)
+        registry.append(klass)
         return klass
 
 
@@ -141,4 +145,4 @@ class DatabaseThingy(Thingy):
         return cls.names[-1].lower()
 
 
-__all__ = ["View", "Thingy", "DatabaseThingy"]
+__all__ = ["View", "registry", "Thingy", "DatabaseThingy"]
