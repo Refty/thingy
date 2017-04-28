@@ -89,8 +89,8 @@ class Thingy(object):
     def update(self, *args, **kwargs):
         self._update(*args, **kwargs)
 
-    def view(self, name="defaults", *args, **kwargs):
-        return self._views[name](self, *args, **kwargs)
+    def view(self, name="defaults"):
+        return self._views[name](self)
 
 
 names_regex = re.compile("([A-Z][a-z]+)")
