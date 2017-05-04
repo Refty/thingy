@@ -19,7 +19,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     platforms="any",
-    install_requires=["thingy>=1.10.0"],
+    install_requires=["six>=1.10.0"],
     classifiers=[
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
