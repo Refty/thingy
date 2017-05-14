@@ -132,8 +132,7 @@ class DatabaseThingy(Thingy):
     def names(cls):
         return names_regex.findall(cls.__name__)
 
-    @classproperty
-    def database_name(cls):
+    def get_database_name(cls):
         if cls._database:
             return cls._get_database_name(cls._database)
         try:
@@ -141,11 +140,14 @@ class DatabaseThingy(Thingy):
         except IndexError:
             pass
 
-    @classproperty
-    def table_name(cls):
+    database_name = classproperty(get_database_name)
+
+    def get_table_name(cls):
         if cls._table:
             return cls._get_table_name(cls._table)
         return cls.names[-1].lower()
+
+    table_name = classproperty(get_table_name)
 
 
 __all__ = ["View", "registry", "Thingy", "DatabaseThingy"]
