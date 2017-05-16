@@ -141,6 +141,7 @@ class DatabaseThingy(Thingy):
             pass
 
     database_name = classproperty(get_database_name)
+    get_database_name = classmethod(get_database_name)
 
     def get_table_name(cls):
         if cls._table:
@@ -148,6 +149,7 @@ class DatabaseThingy(Thingy):
         return cls.names[-1].lower()
 
     table_name = classproperty(get_table_name)
+    get_table_name = classmethod(get_table_name)
 
 
 __all__ = ["View", "registry", "Thingy", "DatabaseThingy"]
