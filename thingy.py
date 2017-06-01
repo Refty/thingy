@@ -116,24 +116,20 @@ class DatabaseThingy(Thingy):
     def _get_table_name(cls, table):
         pass
 
-    @classproperty
-    def database(cls):
+    @classmethod
+    def get_database(cls):
         if not cls._database:
             cls._database = cls._get_database(cls._table, cls.database_name)
         return cls._database
 
-    @classproperty
-    def table(cls):
+    @classmethod
+    def get_table(cls):
         if not cls._table:
             cls._table = cls._get_table(cls.database, cls.table_name)
         return cls._table
 
-    @classproperty
-    def names(cls):
-        return names_regex.findall(cls.__name__)
-
-    @classproperty
-    def database_name(cls):
+    @classmethod
+    def get_database_name(cls):
         if cls._database:
             return cls._get_database_name(cls._database)
         try:
@@ -141,11 +137,31 @@ class DatabaseThingy(Thingy):
         except IndexError:
             pass
 
-    @classproperty
-    def table_name(cls):
+    @classmethod
+    def get_table_name(cls):
         if cls._table:
             return cls._get_table_name(cls._table)
         return cls.names[-1].lower()
+
+    @classproperty
+    def database(cls):
+        return cls.get_database()
+
+    @classproperty
+    def table(cls):
+        return cls.get_table()
+
+    @classproperty
+    def names(cls):
+        return names_regex.findall(cls.__name__)
+
+    @classproperty
+    def database_name(cls):
+        return cls.get_database_name()
+
+    @classproperty
+    def table_name(cls):
+        return cls.get_table_name()
 
 
 __all__ = ["View", "registry", "Thingy", "DatabaseThingy"]
