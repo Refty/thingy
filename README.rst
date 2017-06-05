@@ -2,6 +2,13 @@
 Thingy
 ======
 
+.. image:: https://img.shields.io/travis/numberly/thingy.svg
+   :target: https://travis-ci.org/numberly/thingy
+.. image:: https://img.shields.io/coveralls/numberly/thingy.svg
+   :target: https://coveralls.io/github/numberly/thingy
+
+|
+
 Dictionaries as objects, that can have different dictionary views!
 
 
