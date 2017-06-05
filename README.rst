@@ -2,6 +2,10 @@
 Thingy
 ======
 
+.. image:: https://img.shields.io/pypi/v/thingy.svg
+   :target: https://pypi.python.org/pypi/Thingy
+.. image:: https://img.shields.io/github/license/numberly/thingy.svg
+   :target: https://github.com/numberly/thingy/blob/master/LICENSE
 .. image:: https://img.shields.io/travis/numberly/thingy.svg
    :target: https://travis-ci.org/numberly/thingy
 .. image:: https://img.shields.io/coveralls/numberly/thingy.svg
