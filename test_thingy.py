@@ -107,6 +107,14 @@ def test_property_exceptions():
         thingy.foo
     assert str(excinfo.value) == "Foo!"
 
+    class ScreamingThingyChild(ScreamingThingy):
+        pass
+
+    thingy = ScreamingThingyChild()
+    with raises(AttributeError) as excinfo:
+        thingy.foo
+    assert str(excinfo.value) == "Foo!"
+
 
 def test_silence():
     thingy = Thingy()

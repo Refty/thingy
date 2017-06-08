@@ -57,6 +57,10 @@ class ThingyMetaClass(type):
         return klass
 
 
+def is_property(attr, instance):
+    return any(attr in cls.__dict__ for cls in type(instance).__mro__)
+
+
 @six.add_metaclass(ThingyMetaClass)
 class Thingy(object):
     _view_cls = View
@@ -69,8 +73,7 @@ class Thingy(object):
         try:
             return object.__getattribute__(self, attr)
         except AttributeError:
-            is_property = (attr in self.__class__.__dict__)
-            if not is_property and self._silent:
+            if not is_property(attr, self) and self._silent:
                 return None
             raise
 
