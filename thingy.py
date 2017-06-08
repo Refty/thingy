@@ -69,7 +69,7 @@ class Thingy(object):
         try:
             return object.__getattribute__(self, attr)
         except AttributeError:
-            is_property = (attr in dir(self))
+            is_property = (attr in self.__class__.__dict__)
             if not is_property and self._silent:
                 return None
             raise
