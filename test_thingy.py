@@ -96,6 +96,18 @@ def test_missing_view():
         thingy.view("nop")
 
 
+def test_property_exceptions():
+    class ScreamingThingy(Thingy):
+        @property
+        def foo(self):
+            raise AttributeError("Foo!")
+
+    thingy = ScreamingThingy()
+    with raises(AttributeError) as excinfo:
+        thingy.foo
+    assert str(excinfo.value) == "Foo!"
+
+
 def test_silence():
     thingy = Thingy()
     assert thingy.foo is None
