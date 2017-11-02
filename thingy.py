@@ -103,6 +103,8 @@ names_regex = re.compile("([A-Z][a-z]+)")
 class DatabaseThingy(Thingy):
     _database = None
     _table = None
+    _database_name = None
+    _table_name = None
 
     @classmethod
     def _get_database(cls, table, name):
@@ -122,20 +124,22 @@ class DatabaseThingy(Thingy):
 
     @classmethod
     def get_database(cls):
-        if not cls._database:
-            cls._database = cls._get_database(cls._table, cls.database_name)
-        return cls._database
+        if cls._database:
+            return cls._database
+        return cls._get_database(cls._table, cls.database_name)
 
     @classmethod
     def get_table(cls):
-        if not cls._table:
-            cls._table = cls._get_table(cls.database, cls.table_name)
-        return cls._table
+        if cls._table:
+            return cls._table
+        return cls._get_table(cls.database, cls.table_name)
 
     @classmethod
     def get_database_name(cls):
         if cls._database:
             return cls._get_database_name(cls._database)
+        if cls._database_name:
+            return cls._database_name
         try:
             return cls.names[-2]
         except IndexError:
@@ -145,6 +149,10 @@ class DatabaseThingy(Thingy):
     def get_table_name(cls):
         if cls._table:
             return cls._get_table_name(cls._table)
+        if cls._table_name:
+            return cls._table_name
+        if cls._database or cls._database_name:
+            return "_".join(cls.names)
         return cls.names[-1]
 
     @classproperty

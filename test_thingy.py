@@ -181,28 +181,76 @@ def test_database_names():
     assert DatabaseThingy.names == ["database", "thingy"]
 
 
-def test_database_name():
+def test_database_name_from_class():
     class DatabaseTable(DatabaseThingy):
         pass
 
     assert DatabaseTable.database_name == "database"
 
-    class Table(DatabaseThingy):
+
+def test_database_name_from_database():
+    class DatabaseTable(DatabaseThingy):
         _database = True
 
-    assert Table.database_name is None
+    assert DatabaseTable.database_name is None
 
 
-def test_table_names():
-    class Table(DatabaseThingy):
+def test_database_name_from_attribute():
+    class DatabaseTable(DatabaseThingy):
+        _database_name = "foo"
+
+    assert DatabaseTable.database_name is "foo"
+
+
+def test_database_name_priority():
+    class DatabaseTable(DatabaseThingy):
+        _database = True
+        _database_name = "foo"
+
+    assert DatabaseTable.database_name is None
+
+
+def test_table_name_from_class():
+    class DatabaseTable(DatabaseThingy):
         pass
 
-    assert Table.table_name == "table"
+    assert DatabaseTable.table_name == "table"
 
-    class Table(DatabaseThingy):
+
+def test_table_name_from_class_with_database():
+    class DatabaseTable(DatabaseThingy):
+        _database = True
+
+    assert DatabaseTable.table_name == "database_table"
+
+
+def test_table_name_from_class_with_database_name():
+    class DatabaseTable(DatabaseThingy):
+        _database_name = "foo"
+
+    assert DatabaseTable.table_name == "database_table"
+
+
+def test_table_name_from_table():
+    class DatabaseTable(DatabaseThingy):
         _table = True
 
-    assert Table.table_name is None
+    assert DatabaseTable.table_name is None
+
+
+def test_table_name_from_attribute():
+    class DatabaseTable(DatabaseThingy):
+        _table_name = "foo"
+
+    assert DatabaseTable.table_name == "foo"
+
+
+def test_table_name_priority():
+    class DatabaseTable(DatabaseThingy):
+        _table = True
+        _table_name = "foo"
+
+    assert DatabaseTable.table_name is None
 
 
 def test_undefined_database():
@@ -243,6 +291,11 @@ def test_undefined_table():
 
 def test_database():
     class DatabaseTable(DatabaseThingy):
+        _database = True
+
+    assert DatabaseTable.database is True
+
+    class DatabaseTable(DatabaseThingy):
         _table = True
 
         @classmethod
@@ -253,6 +306,11 @@ def test_database():
 
 
 def test_table():
+    class DatabaseTable(DatabaseThingy):
+        _table = True
+
+    assert DatabaseTable.table is True
+
     class DatabaseTable(DatabaseThingy):
         _database = True
 
