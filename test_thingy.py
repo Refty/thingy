@@ -178,7 +178,7 @@ def test_tuple_aliases(TestThingy):
 
 
 def test_database_names():
-    assert DatabaseThingy.names == ["Database", "Thingy"]
+    assert DatabaseThingy.names == ["database", "thingy"]
 
 
 def test_database_name():

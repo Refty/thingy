@@ -137,7 +137,7 @@ class DatabaseThingy(Thingy):
         if cls._database:
             return cls._get_database_name(cls._database)
         try:
-            return cls.names[-2].lower()
+            return cls.names[-2]
         except IndexError:
             pass
 
@@ -145,7 +145,7 @@ class DatabaseThingy(Thingy):
     def get_table_name(cls):
         if cls._table:
             return cls._get_table_name(cls._table)
-        return cls.names[-1].lower()
+        return cls.names[-1]
 
     @classproperty
     def database(cls):
@@ -157,7 +157,8 @@ class DatabaseThingy(Thingy):
 
     @classproperty
     def names(cls):
-        return names_regex.findall(cls.__name__)
+        names = names_regex.findall(cls.__name__)
+        return [name.lower() for name in names]
 
     @classproperty
     def database_name(cls):
