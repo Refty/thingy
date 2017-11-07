@@ -6,8 +6,8 @@ import six
 
 class classproperty(property):
 
-    def __get__(self, cls, owner):
-        return self.fget(owner)
+    def __get__(self, instance, cls):
+        return self.fget(cls)
 
 
 class View(object):
