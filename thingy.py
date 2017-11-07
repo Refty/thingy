@@ -6,7 +6,13 @@ import six
 
 class classproperty(property):
 
+    def __init__(self, function):
+        property.__init__(self, function)
+        self.function_name = function.__name__
+
     def __get__(self, instance, cls):
+        if instance:
+            return instance.__dict__[self.function_name]
         return self.fget(cls)
 
 
@@ -68,6 +74,12 @@ class Thingy(object):
 
     def __init__(self, *args, **kwargs):
         self._update(*args, **kwargs)
+
+    def __setattr__(self, name, value):
+        if is_property(name, self):
+            self.__dict__[name] = value
+        else:
+            object.__setattr__(self, name, value)
 
     def __getattribute__(self, attr):
         try:

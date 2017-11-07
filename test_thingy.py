@@ -15,6 +15,21 @@ def test_classproperty():
     assert Test.foo == "bar"
 
 
+def test_classproperty_vs_attribute_conflicts():
+    class Foo(Thingy):
+        _foo = "bar"
+
+        @classproperty
+        def foo(cls):
+            return cls._foo
+
+    assert Foo.foo == "bar"
+
+    foo = Foo(foo="baz")
+    assert foo._foo == "bar"
+    assert foo.foo == "baz"
+
+
 def test_view_return_type():
     view = View()
     assert view(None) == {}
