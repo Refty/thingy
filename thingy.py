@@ -76,10 +76,10 @@ class Thingy(object):
         self._update(*args, **kwargs)
 
     def __setattr__(self, name, value):
-        if is_property(name, self):
-            self.__dict__[name] = value
-        else:
+        try:
             object.__setattr__(self, name, value)
+        except AttributeError:
+            self.__dict__[name] = value
 
     def __getattribute__(self, attr):
         try:
