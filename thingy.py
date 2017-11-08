@@ -75,11 +75,11 @@ class Thingy(object):
     def __init__(self, *args, **kwargs):
         self._update(*args, **kwargs)
 
-    def __setattr__(self, name, value):
+    def __setattr__(self, attr, value):
         try:
-            object.__setattr__(self, name, value)
+            object.__setattr__(self, attr, value)
         except AttributeError:
-            self.__dict__[name] = value
+            self.__dict__[attr] = value
 
     def __getattribute__(self, attr):
         try:
