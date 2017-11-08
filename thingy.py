@@ -12,7 +12,12 @@ class classproperty(property):
 
     def __get__(self, instance, cls):
         if instance:
-            return instance.__dict__[self.function_name]
+            try:
+                return instance.__dict__[self.function_name]
+            except KeyError:
+                raise AttributeError("'{}' object has no attribute '{}' "
+                                     "(but its class has!)"
+                                     .format(cls.__name__, self.function_name))
         return self.fget(cls)
 
 

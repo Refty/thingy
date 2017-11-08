@@ -25,6 +25,13 @@ def test_classproperty_vs_attribute_conflicts():
 
     assert Foo.foo == "bar"
 
+    foo = Foo()
+    assert foo.foo is None
+
+    foo._silent = False
+    with raises(AttributeError):
+        foo.foo
+
     foo = Foo(foo="baz")
     assert foo._foo == "bar"
     assert foo.foo == "baz"
