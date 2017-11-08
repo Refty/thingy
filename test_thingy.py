@@ -30,6 +30,27 @@ def test_classproperty_vs_attribute_conflicts():
     assert foo.foo == "baz"
 
 
+def test_property_vs_attribute_conflicts():
+    class Foo(Thingy):
+        _foo = "bar"
+
+        @property
+        def foo(self):
+            return self._foo
+
+    foo = Foo()
+    assert foo.foo is "bar"
+
+    with raises(AttributeError) as excinfo:
+        foo = Foo(foo="baz")
+    assert str(excinfo.value) == "can't set attribute"
+
+    foo = Foo({"foo": "baz"})
+    assert foo._foo == "bar"
+    assert foo.foo == "bar"
+    assert foo.__dict__["foo"] == "baz"
+
+
 def test_view_return_type():
     view = View()
     assert view(None) == {}

@@ -83,6 +83,8 @@ class Thingy(object):
         try:
             object.__setattr__(self, attr, value)
         except AttributeError:
+            if type(getclassattr(self, attr)) is not classproperty:
+                raise
             self.__dict__[attr] = value
 
     def __getattribute__(self, attr):
