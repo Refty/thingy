@@ -120,7 +120,7 @@ class Thingy(object):
         return self._views[name](self)
 
 
-names_regex = re.compile("([A-Z][a-z]+)")
+names_regex = re.compile("([A-Z]+(?![a-z])|[A-Z][a-z]+)")
 
 
 class DatabaseThingy(Thingy):

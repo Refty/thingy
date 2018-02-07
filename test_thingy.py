@@ -218,6 +218,23 @@ def test_database_names():
     assert DatabaseThingy.names == ["database", "thingy"]
 
 
+def test_database_names_with_abbreviation():
+    class FOOBarQux(DatabaseThingy):
+        pass
+
+    assert FOOBarQux.names == ["foo", "bar", "qux"]
+
+    class BarFOOQux(DatabaseThingy):
+        pass
+
+    assert BarFOOQux.names == ["bar", "foo", "qux"]
+
+    class BarQuxFOO(DatabaseThingy):
+        pass
+
+    assert BarQuxFOO.names == ["bar", "qux", "foo"]
+
+
 def test_database_name_from_class():
     class DatabaseTable(DatabaseThingy):
         pass
