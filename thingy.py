@@ -178,6 +178,11 @@ class DatabaseThingy(Thingy):
             return "_".join(cls.names)
         return cls.names[-1]
 
+    @classmethod
+    def get_names(cls):
+        names = names_regex.findall(cls.__name__)
+        return [name.lower() for name in names]
+
     @classproperty
     def database(cls):
         return cls.get_database()
@@ -188,8 +193,7 @@ class DatabaseThingy(Thingy):
 
     @classproperty
     def names(cls):
-        names = names_regex.findall(cls.__name__)
-        return [name.lower() for name in names]
+        return cls.get_names()
 
     @classproperty
     def database_name(cls):
