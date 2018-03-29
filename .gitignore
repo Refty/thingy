@@ -56,3 +56,6 @@ Session.vim
 # virtualenv
 .venv*
 src/
+
+# docs
+docs/_build
