@@ -36,3 +36,9 @@ author = 'numberly'
 # a list of builtin themes.
 #
 html_theme = 'alabaster'
+
+html_sidebars = {
+    '**': [
+        'github-corners.html'
+    ]
+}
