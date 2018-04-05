@@ -22,6 +22,13 @@ class classproperty(property):
 
 
 class View(object):
+    """Transform an :class:`object` into a dict
+
+    :param bool defaults: Include attributes of object
+    :param list include: A list of properties to include
+    :param list exclude: A list of attributes to exclude
+    :param bool ordered: Use an :class:`OrderedDict` instead
+    """
 
     def __init__(self, defaults=False, include=None, exclude=None,
                  ordered=False):
@@ -78,6 +85,7 @@ def getclassattr(instance, attr):
 
 @six.add_metaclass(ThingyMetaClass)
 class Thingy(object):
+    """Allows you to use object notation instead of dict notation"""
     _view_cls = View
     _silent = True
 
