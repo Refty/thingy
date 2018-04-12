@@ -1,7 +1,8 @@
 from collections import OrderedDict
 
 from pytest import fixture, raises
-from thingy import DatabaseThingy, Thingy, View, classproperty, registry
+from thingy import (DatabaseThingy, Thingy, View, NamesMixin, classproperty,
+                    registry)
 
 
 def test_classproperty():
@@ -214,25 +215,37 @@ def test_tuple_aliases(TestThingy):
     assert thingy.view("test") == {"FOO": "bar"}
 
 
-def test_database_names():
-    assert DatabaseThingy.names == ["database", "thingy"]
+def test_names():
+    class FooBar(NamesMixin):
+        pass
+
+    assert FooBar.names == ["foo", "bar"]
+
+    class FooBar(NamesMixin, Thingy):
+        pass
+
+    assert FooBar.names == ["foo", "bar"]
 
 
-def test_database_names_with_abbreviation():
-    class FOOBarQux(DatabaseThingy):
+def test_names_with_abbreviation():
+    class FOOBarQux(NamesMixin):
         pass
 
     assert FOOBarQux.names == ["foo", "bar", "qux"]
 
-    class BarFOOQux(DatabaseThingy):
+    class BarFOOQux(NamesMixin):
         pass
 
     assert BarFOOQux.names == ["bar", "foo", "qux"]
 
-    class BarQuxFOO(DatabaseThingy):
+    class BarQuxFOO(NamesMixin):
         pass
 
     assert BarQuxFOO.names == ["bar", "qux", "foo"]
+
+
+def test_database_names():
+    assert DatabaseThingy.names == ["database", "thingy"]
 
 
 def test_database_name_from_class():

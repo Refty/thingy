@@ -131,7 +131,19 @@ class Thingy(object):
 names_regex = re.compile("([A-Z]+(?![a-z])|[A-Z][a-z]+)")
 
 
-class DatabaseThingy(Thingy):
+class NamesMixin(object):
+
+    @classmethod
+    def get_names(cls):
+        names = names_regex.findall(cls.__name__)
+        return [name.lower() for name in names]
+
+    @classproperty
+    def names(cls):
+        return cls.get_names()
+
+
+class DatabaseThingy(NamesMixin, Thingy):
     _database = None
     _table = None
     _database_name = None
@@ -186,11 +198,6 @@ class DatabaseThingy(Thingy):
             return "_".join(cls.names)
         return cls.names[-1]
 
-    @classmethod
-    def get_names(cls):
-        names = names_regex.findall(cls.__name__)
-        return [name.lower() for name in names]
-
     @classproperty
     def database(cls):
         return cls.get_database()
@@ -198,10 +205,6 @@ class DatabaseThingy(Thingy):
     @classproperty
     def table(cls):
         return cls.get_table()
-
-    @classproperty
-    def names(cls):
-        return cls.get_names()
 
     @classproperty
     def database_name(cls):
