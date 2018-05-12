@@ -167,19 +167,19 @@ class DatabaseThingy(NamesMixin, Thingy):
 
     @classmethod
     def get_database(cls):
-        if cls._database:
+        if cls._database is not None:
             return cls._database
         return cls._get_database(cls._table, cls.database_name)
 
     @classmethod
     def get_table(cls):
-        if cls._table:
+        if cls._table is not None:
             return cls._table
         return cls._get_table(cls.database, cls.table_name)
 
     @classmethod
     def get_database_name(cls):
-        if cls._database:
+        if cls._database is not None:
             return cls._get_database_name(cls._database)
         if cls._database_name:
             return cls._database_name
@@ -190,11 +190,11 @@ class DatabaseThingy(NamesMixin, Thingy):
 
     @classmethod
     def get_table_name(cls):
-        if cls._table:
+        if cls._table is not None:
             return cls._get_table_name(cls._table)
         if cls._table_name:
             return cls._table_name
-        if cls._database or cls._database_name:
+        if cls._database is not None or cls._database_name:
             return "_".join(cls.names)
         return cls.names[-1]
 
