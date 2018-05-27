@@ -10,6 +10,8 @@ Thingy
    :target: https://travis-ci.org/numberly/thingy
 .. image:: https://img.shields.io/coveralls/numberly/thingy.svg
    :target: https://coveralls.io/github/numberly/thingy
+.. image:: https://readthedocs.org/projects/python-thingy/badge
+   :target: https://python-thingy.readthedocs.io
 
 |
 
