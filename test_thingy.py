@@ -47,7 +47,7 @@ def test_property_vs_attribute_conflicts():
             return self._foo
 
     foo = Foo()
-    assert foo.foo is "bar"
+    assert foo.foo == "bar"
 
     with raises(AttributeError) as excinfo:
         foo = Foo(foo="baz")
@@ -266,7 +266,7 @@ def test_database_name_from_attribute():
     class DatabaseTable(DatabaseThingy):
         _database_name = "foo"
 
-    assert DatabaseTable.database_name is "foo"
+    assert DatabaseTable.database_name == "foo"
 
 
 def test_database_name_priority():
