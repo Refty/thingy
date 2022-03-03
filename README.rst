@@ -4,12 +4,12 @@ Thingy
 
 .. image:: https://img.shields.io/pypi/v/thingy.svg
    :target: https://pypi.python.org/pypi/Thingy
-.. image:: https://img.shields.io/github/license/numberly/thingy.svg
-   :target: https://github.com/numberly/thingy/blob/master/LICENSE
-.. image:: https://img.shields.io/travis/numberly/thingy.svg
-   :target: https://travis-ci.org/numberly/thingy
-.. image:: https://img.shields.io/coveralls/numberly/thingy.svg
-   :target: https://coveralls.io/github/numberly/thingy
+.. image:: https://img.shields.io/github/license/Refty/thingy.svg
+   :target: https://github.com/Refty/thingy/blob/master/LICENSE
+.. image:: https://img.shields.io/travis/Refty/thingy.svg
+   :target: https://travis-ci.org/Refty/thingy
+.. image:: https://img.shields.io/coveralls/Refty/thingy.svg
+   :target: https://coveralls.io/github/Refty/thingy
 .. image:: https://readthedocs.org/projects/python-thingy/badge
    :target: https://python-thingy.readthedocs.io
 
@@ -85,6 +85,22 @@ To run Thingy tests:
 
 * install developers requirements with ``pip install -r requirements.txt``;
 * run ``pytest``.
+
+
+Sponsors
+========
+
+.. image:: https://raw.githubusercontent.com/Refty/thingy/master/img/numberly.png
+    :alt: Numberly
+    :align: center
+    :target: https://numberly.com/
+
+|
+
+.. image:: https://raw.githubusercontent.com/Refty/thingy/master/img/refty.png
+    :alt: Refty
+    :align: center
+    :target: https://refty.co/
 
 
 License

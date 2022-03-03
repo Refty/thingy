@@ -9,10 +9,10 @@ def get_description():
 setup(
     name="Thingy",
     version="0.8.5",
-    url="https://github.com/numberly/thingy",
+    url="https://github.com/Refty/thingy",
     license="MIT",
     author="Guillaume Gelin",
-    author_email="ramnes@1000mercis.com",
+    author_email="guillaume@refty.co",
     description="Dictionary as an object, that can have different views",
     long_description=get_description(),
     py_modules=["thingy"],
