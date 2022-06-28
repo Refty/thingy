@@ -8,7 +8,8 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
+
+sys.path.insert(0, os.path.abspath(".."))
 
 
 # -- General configuration ------------------------------------------------
@@ -22,12 +23,12 @@ extensions = [
 ]
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 # General information about the project.
-project = 'Thingy'
-copyright = 'Refty'
-author = 'Refty'
+project = "Thingy"
+copyright = "Refty"
+author = "Refty"
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -35,13 +36,9 @@ author = 'Refty'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = "alabaster"
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
-html_sidebars = {
-    '**': [
-        'github-corners.html'
-    ]
-}
+html_sidebars = {"**": ["github-corners.html"]}

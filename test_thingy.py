@@ -1,8 +1,8 @@
 from collections import OrderedDict
 
 from pytest import fixture, raises
-from thingy import (DatabaseThingy, Thingy, View, NamesMixin, classproperty,
-                    registry)
+
+from thingy import DatabaseThingy, NamesMixin, Thingy, View, classproperty, registry
 
 
 def test_classproperty():
@@ -69,7 +69,6 @@ def test_view_return_type():
 @fixture
 def TestThingy():
     class TestThingy(Thingy):
-
         @property
         def foobaz(self):
             return self.foo + self.baz

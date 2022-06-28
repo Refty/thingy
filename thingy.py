@@ -3,7 +3,6 @@ from collections import OrderedDict
 
 
 class classproperty(property):
-
     def __init__(self, function):
         property.__init__(self, function)
         self.function_name = function.__name__
@@ -13,9 +12,11 @@ class classproperty(property):
             try:
                 return instance.__dict__[self.function_name]
             except KeyError:
-                raise AttributeError("'{}' object has no attribute '{}' "
-                                     "(but its class has!)"
-                                     .format(cls.__name__, self.function_name))
+                raise AttributeError(
+                    "'{}' object has no attribute '{}' (but its class has!)".format(
+                        cls.__name__, self.function_name
+                    )
+                )
         return self.fget(cls)
 
 
@@ -28,8 +29,7 @@ class View(object):
     :param bool ordered: Use an :class:`OrderedDict` instead
     """
 
-    def __init__(self, defaults=False, include=None, exclude=None,
-                 ordered=False):
+    def __init__(self, defaults=False, include=None, exclude=None, ordered=False):
         self.defaults = defaults
         if isinstance(include, str):
             include = [include]
@@ -63,7 +63,6 @@ registry = []
 
 
 class ThingyMetaClass(type):
-
     def __new__(cls, name, bases, attrs):
         attrs.setdefault("_views", {})
         klass = type.__new__(cls, name, bases, attrs)
@@ -83,6 +82,7 @@ def getclassattr(instance, attr):
 
 class Thingy(object, metaclass=ThingyMetaClass):
     """Allows you to use object notation instead of dict notation"""
+
     _view_cls = View
     _silent = True
 
@@ -129,7 +129,6 @@ names_regex = re.compile("([A-Z]+(?![a-z])|[A-Z][a-z]+)")
 
 
 class NamesMixin(object):
-
     @classmethod
     def get_names(cls):
         names = names_regex.findall(cls.__name__)
