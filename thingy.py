@@ -1,8 +1,6 @@
 import re
 from collections import OrderedDict
 
-import six
-
 
 class classproperty(property):
 
@@ -33,10 +31,10 @@ class View(object):
     def __init__(self, defaults=False, include=None, exclude=None,
                  ordered=False):
         self.defaults = defaults
-        if isinstance(include, six.string_types):
+        if isinstance(include, str):
             include = [include]
         self.include = include or []
-        if isinstance(exclude, six.string_types):
+        if isinstance(exclude, str):
             exclude = [exclude]
         self.exclude = exclude or []
         self.ordered = ordered
@@ -83,8 +81,7 @@ def getclassattr(instance, attr):
             pass
 
 
-@six.add_metaclass(ThingyMetaClass)
-class Thingy(object):
+class Thingy(object, metaclass=ThingyMetaClass):
     """Allows you to use object notation instead of dict notation"""
     _view_cls = View
     _silent = True
