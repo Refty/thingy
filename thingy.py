@@ -105,6 +105,11 @@ class Thingy(object, metaclass=ThingyMetaClass):
                 return None
             raise
 
+    def __eq__(self, other):
+        if isinstance(other, Thingy):
+            return self.__dict__ == other.__dict__
+        return super().__eq__(other)
+
     def __repr__(self):
         return "{}({})".format(self.__class__.__name__, self.__dict__)
 

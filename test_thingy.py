@@ -102,6 +102,13 @@ def test_init_mixed():
     assert thingy.baz == "qux"
 
 
+def test_eq():
+    thingy = Thingy(foo="bar")
+    other_thingy = Thingy(foo="bar")
+    assert thingy == other_thingy
+    assert thingy != {"foo": "bar"}
+
+
 def test_repr():
     thingy = eval(repr(Thingy(bar="baz")))
     assert isinstance(thingy, Thingy)
