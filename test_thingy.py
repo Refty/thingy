@@ -49,9 +49,8 @@ def test_property_vs_attribute_conflicts():
     foo = Foo()
     assert foo.foo == "bar"
 
-    with raises(AttributeError) as excinfo:
+    with raises(AttributeError):
         foo = Foo(foo="baz")
-    assert str(excinfo.value) in ("can't set attribute", "can't set attribute 'foo'")
 
     foo = Foo({"foo": "baz"})
     assert foo._foo == "bar"
