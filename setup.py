@@ -8,7 +8,7 @@ def get_description():
 
 setup(
     name="Thingy",
-    version="0.9.0",
+    version="0.10.0",
     url="https://github.com/Refty/thingy",
     license="MIT",
     author="Guillaume Gelin",
